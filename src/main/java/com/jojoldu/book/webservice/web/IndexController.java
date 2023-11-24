@@ -1,5 +1,6 @@
 package com.jojoldu.book.webservice.web;
 
+import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
@@ -16,11 +17,11 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
+
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user"); // getAttribute로 가져오던 세션 정보를 어노테이션 기반으로 개선
         if (user != null) {
             model.addAttribute("username", user.getName());
         }
