@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                     .authorizeRequests()
                     .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
                     .antMatchers("/api/v1/**").hasRole(Role.USER.name())
-                    .anyRequest().authenticated()
+                    .anyRequest().authenticated() //위 antMatchers를 제외한 모든 url들은 로그인한 사용자들만 허용한다.
                 .and()
                     .logout()
                         .logoutSuccessUrl("/")
