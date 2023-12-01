@@ -1,18 +1,16 @@
 package com.jojoldu.book.webservice.service.posts;
 
+import com.jojoldu.book.webservice.common.PageableRequest;
 import com.jojoldu.book.webservice.domain.posts.Posts;
 import com.jojoldu.book.webservice.domain.posts.PostsRepository;
-import com.jojoldu.book.webservice.web.dto.PostsListResponseDto;
-import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
-import com.jojoldu.book.webservice.web.dto.PostsSaveRequestDto;
-import com.jojoldu.book.webservice.web.dto.PostsUpdateRequestDto;
+import com.jojoldu.book.webservice.web.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -53,5 +51,10 @@ public class PostsService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
         postsRepository.delete(posts);
+    }
+
+    public Page<NoticeResponseDto> findAll(PageableRequest request) {
+        Page<Posts> page = postsRepository.findAll(request.toPageable());
+        return page.map(NoticeResponseDto::new);
     }
 }
