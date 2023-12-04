@@ -1,6 +1,9 @@
 package com.jojoldu.book.webservice.web;
 
 import com.jojoldu.book.webservice.config.RestTemplateConfig;
+import com.jojoldu.book.webservice.external.news.News;
+import com.jojoldu.book.webservice.external.news.NewsFactory;
+import com.jojoldu.book.webservice.external.news.NewsType;
 import com.jojoldu.book.webservice.web.dto.NaverNewsSearchDto;
 import com.nimbusds.jose.util.StandardCharset;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +13,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -56,6 +57,40 @@ public class Naver {
 
     public <T> T exchangeAsList(RequestEntity<?> requestEntity, Class<T> responseType) {
         return restTemplate.exchange(requestEntity, responseType).getBody();
+
     }
 
+
+    @GetMapping("/news/{type}")
+    public NaverNewsSearchDto test(@PathVariable NewsType newsType, @RequestParam("query") String query) {
+
+        News news = NewsFactory.generated(newsType);
+        NaverNewsSearchDto news1 = news.getNews(restTemplate, NaverNewsSearchDto.class, query);
+    }
+
+
+
+
 }
+
+Social {
+    getId();
+    getName();
+}
+
+class Google impl{
+    String id;
+    String name
+}
+
+class Kakao {
+    String kid;
+    String nickname;
+}
+
+
+
+
+
+
+
