@@ -1,7 +1,7 @@
 package com.jojoldu.book.webservice.config.auth.dto;
 
-import com.jojoldu.book.webservice.domain.user.Role;
-import com.jojoldu.book.webservice.domain.user.User;
+import com.jojoldu.book.webservice.domain.oAuthUser.Role;
+import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.domain.user;
+package com.jojoldu.book.webservice.domain.oAuthUser;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

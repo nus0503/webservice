@@ -2,8 +2,8 @@ package com.jojoldu.book.webservice.config.auth;
 
 import com.jojoldu.book.webservice.config.auth.dto.OAuthAttributes;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
-import com.jojoldu.book.webservice.domain.user.User;
-import com.jojoldu.book.webservice.domain.user.UserRepository;
+import com.jojoldu.book.webservice.domain.oAuthUser.User;
+import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

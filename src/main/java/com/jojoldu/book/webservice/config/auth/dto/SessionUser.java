@@ -1,6 +1,6 @@
 package com.jojoldu.book.webservice.config.auth.dto;
 
-import com.jojoldu.book.webservice.domain.user.User;
+import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import lombok.Getter;
 
 import java.io.Serializable;
