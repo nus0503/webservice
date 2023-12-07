@@ -3,7 +3,9 @@ package com.jojoldu.book.webservice.external.news;
 import com.jojoldu.book.webservice.web.dto.NaverNewsSearchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.RequestEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -11,20 +13,17 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
-
 public class NaverNews extends News{
 
-    @Value("#{externalApi['client-id']}")
-    private String clientId;
+//    @Value("${client.id}")
+    private String clientId = "t4VkOvf3qDA7ceFUTgut";
 
-    @Value("#{externalApi['client-secret']}")
-    private String clientSecret;
-
-
+//    @Value("${client.secret}")
+    private String clientSecret = "KAEL6tLa8O";
 
 
     @Override
-    RequestEntity<?> getNewsDetail(String query) {
+    RequestEntity<Void> getNewsDetail(String query) {
 
         ByteBuffer buffer = StandardCharsets.UTF_8.encode(query);
         String encode = StandardCharsets.UTF_8.decode(buffer).toString();
