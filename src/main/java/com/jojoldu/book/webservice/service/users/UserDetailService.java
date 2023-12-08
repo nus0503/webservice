@@ -5,6 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+/**
+ * UserDetailsService 인터페이스를 구현하고, loadUserByUsername() 메소드를 오버라이딩해서 시큐리티에서
+ * 사용자 정보를 가져오는 로직 작성
+ */
 @RequiredArgsConstructor
 @Service
 public class UserDetailService implements UserDetailsService {
