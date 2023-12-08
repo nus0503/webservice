@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Getter
 public class OAuthAttributes {
@@ -56,6 +57,7 @@ public class OAuthAttributes {
         return User.builder()
                 .name(name)
                 .email(email)
+                .password(UUID.randomUUID().toString())
                 .picture(picture)
                 .role(Role.GUEST)
                 .build();
