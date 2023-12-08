@@ -15,6 +15,10 @@
                     <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
                     <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
                 {{/username}}
+                {{#userInfo}}
+                    <span>{{userInfo.email}} 님 안녕하세요.</span>
+                    <span>{{userInfo.password}} 은 비번</span>
+                {{/userInfo}}
             </div>
         </div>
 
