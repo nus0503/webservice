@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**", "/news/**").permitAll()
+                    .antMatchers("/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**", "/news/**").permitAll()
                     .antMatchers("/api/v1/**").hasRole(Role.USER.name())
                     .anyRequest().authenticated() //위 antMatchers를 제외한 모든 url들은 로그인한 사용자들만 허용한다.
                 .and()
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .and()
                 //Oauth 로그인
                     .oauth2Login()
-                        .loginPage("/loginForm") //로그인 페이지 url
+                        .loginPage("/login") //로그인 페이지 url
                         .userInfoEndpoint()
                             .userService(customOAuth2UserService);
         return http.build();

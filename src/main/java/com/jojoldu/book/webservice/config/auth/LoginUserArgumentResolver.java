@@ -10,6 +10,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Component
@@ -28,6 +29,10 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
                                   ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest,
                                   WebDataBinderFactory binderFactory) throws Exception {
-        return httpSession.getAttribute("user");
+        if (Objects.nonNull(httpSession.getAttribute("user"))) {
+            return httpSession.getAttribute("user");
+        }
+        return httpSession.getAttribute("users");
+//        return httpSession.getAttribute("user");
     }
 }
