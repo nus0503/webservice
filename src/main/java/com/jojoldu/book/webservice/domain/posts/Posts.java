@@ -1,6 +1,8 @@
 package com.jojoldu.book.webservice.domain.posts;
 
 import com.jojoldu.book.webservice.domain.BaseTimeEntity;
+import com.jojoldu.book.webservice.domain.oAuthUser.User;
+import com.jojoldu.book.webservice.domain.user.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,10 @@ public class Posts extends BaseTimeEntity {
     private String content;
 
     private String author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
+    private User user;
 
     @Builder
     public Posts(String title, String content, String author) {
