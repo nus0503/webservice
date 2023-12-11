@@ -3,7 +3,6 @@ package com.jojoldu.book.webservice.web;
 import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.PrincipalDetail;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
-import com.jojoldu.book.webservice.domain.user.Users;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +41,7 @@ public class IndexController {
 
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model) {
+        postsService.updateViewCount(id);
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
         return "posts-update";

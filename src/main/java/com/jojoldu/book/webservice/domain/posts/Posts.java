@@ -26,6 +26,9 @@ public class Posts extends BaseTimeEntity {
 
     private String author;
 
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int viewCount;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;

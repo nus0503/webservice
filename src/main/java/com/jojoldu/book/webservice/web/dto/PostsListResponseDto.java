@@ -10,12 +10,15 @@ public class PostsListResponseDto {
     private Long id;
     private String title;
     private String author;
+
+    private int viewCount;
     private LocalDateTime modifiedDate;
 
     public PostsListResponseDto(Posts posts) {
         this.id = posts.getId();
         this.title = posts.getTitle();
         this.author = posts.getAuthor();
+        this.viewCount = posts.getViewCount();
         this.modifiedDate = posts.getModifiedDate();
     }
 }
