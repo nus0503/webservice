@@ -10,7 +10,7 @@ public class PostsSearchListResponseDto {
     private String author;
 
     private int viewCount;
-    private LocalDateTime modifiedDate;
+    private String modifiedDate;
 
     public PostsSearchListResponseDto(Posts posts) {
         this.id = posts.getId();
