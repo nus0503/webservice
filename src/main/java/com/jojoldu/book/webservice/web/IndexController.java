@@ -1,5 +1,6 @@
 package com.jojoldu.book.webservice.web;
 
+import com.jojoldu.book.webservice.common.PageableRequest;
 import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.PrincipalDetail;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
@@ -45,5 +46,11 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
         return "posts-update";
+    }
+
+    @GetMapping("/posts/search")
+    public String search(String keyword, PageableRequest request, Model model) {
+        model.addAttribute("searchList", postsService.search(keyword, request));
+        return "posts-search";
     }
 }

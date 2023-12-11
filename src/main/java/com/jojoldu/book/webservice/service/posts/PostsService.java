@@ -37,6 +37,11 @@ public class PostsService {
             return postsRepository.updateViewCount(id);
     }
 
+    public Page<PostsSearchListResponseDto> search(String keyword, PageableRequest request) {
+        return postsRepository.findByTitleContaining(keyword, request.toPageable())
+                .map(PostsSearchListResponseDto::new);
+    }
+
     public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));

@@ -1,28 +1,22 @@
 package com.jojoldu.book.webservice.web.dto;
 
-import com.jojoldu.book.webservice.common.Period;
 import com.jojoldu.book.webservice.domain.posts.Posts;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 
-
-@Getter
-@NoArgsConstructor
-public class NoticeResponseDto {
-
+public class PostsSearchListResponseDto {
     private Long id;
     private String title;
     private String author;
-    private String modifiedDate;
 
     private int viewCount;
+    private LocalDateTime modifiedDate;
 
-    public NoticeResponseDto(Posts posts) {
+    public PostsSearchListResponseDto(Posts posts) {
         this.id = posts.getId();
         this.title = posts.getTitle();
         this.author = posts.getAuthor();
-        this.modifiedDate = posts.getModifiedDate().format(Period.yyyyMMddHHmm);
         this.viewCount = posts.getViewCount();
+        this.modifiedDate = posts.getModifiedDate();
     }
 }
