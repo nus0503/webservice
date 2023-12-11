@@ -3,8 +3,6 @@ package com.jojoldu.book.webservice.service.users;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
-import com.jojoldu.book.webservice.domain.user.Users;
-import com.jojoldu.book.webservice.domain.user.UsersRepository;
 import com.jojoldu.book.webservice.web.dto.AddUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private final UsersRepository usersRepository;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
