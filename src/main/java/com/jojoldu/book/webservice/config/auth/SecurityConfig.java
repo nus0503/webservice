@@ -25,8 +25,8 @@ public class SecurityConfig extends WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .csrfTokenRepository(new CookieCsrfTokenRepository()).ignoringAntMatchers("/h2-console/**", "/signup").and()
+                .csrf().disable()
+                // 나중에 csrf적용할 것.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringAntMatchers("/h2-console/**", "/signup").and()
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
