@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity // Spring Security 설정 활성화
@@ -23,7 +25,8 @@ public class SecurityConfig extends WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf()
+                .csrfTokenRepository(new CookieCsrfTokenRepository()).ignoringAntMatchers("/h2-console/**", "/signup").and()
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
