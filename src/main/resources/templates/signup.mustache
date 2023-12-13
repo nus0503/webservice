@@ -4,12 +4,19 @@
     <form method="post", action="/user">
 <!--        <input class="aa" type="hidden" name="_csrf" value="{{!_csrf.token}}">-->
         <div class="user-box">
-            <input type="text" name="email">
+            <input type="text" name="name" value="{{#userDto}}{{userDto.name}}{{/userDto}}">
             <label>Username</label>
+            {{#valid_name}} <span id="valid">{{valid_name}}</span> {{/valid_name}}
         </div>
         <div class="user-box">
-            <input type="password" name="password">
+            <input type="text" name="email" value="{{#userDto}}{{userDto.email}}{{/userDto}}">
+            <label>UserEmail</label>
+            {{#valid_email}} <span id="valid">{{valid_email}}</span> {{/valid_email}}
+        </div>
+        <div class="user-box">
+            <input type="password" name="password" value="{{#userDto}}{{userDto.password}}{{/userDto}}">
             <label>Password</label>
+            {{#valid_password}} <span id="valid">{{valid_password}}</span> {{/valid_password}}
         </div>
         <button type="submit">
             <span></span>
