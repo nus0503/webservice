@@ -1,5 +1,6 @@
 package com.jojoldu.book.webservice.config.auth;
 
+import com.jojoldu.book.webservice.common.exception.CustomAuthFailureHandler;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final UserDetailsService userService;
+    private final CustomAuthFailureHandler customAuthFailureHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -43,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                         .loginPage("/loginForm") //로그인 페이지 url
                         .usernameParameter("email") // 로그인 폼에서 전달하는 파라미터 이름이 시큐리티에서는 기본값으로 username과 password이기에 추가 설정
                         .loginProcessingUrl("/login") // 이 url을 로그인 기능을 담당
+                        .failureHandler(customAuthFailureHandler)
                         .defaultSuccessUrl("/") // 로그인 성공시 url
                 .and()
                 //Oauth 로그인

@@ -12,6 +12,11 @@
             <input type="password" name="password">
             <label>Password</label>
         </div>
+        <span>
+            {{#error}}
+            <p id="valid" class="alert alert-danger">{{exception}}</p>
+            {{/error}}
+        </span>
         <button type="submit">로그인</button>
     </form>
 </div>
