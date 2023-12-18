@@ -1,5 +1,7 @@
 package com.jojoldu.book.webservice.web;
 
+import com.jojoldu.book.webservice.config.auth.LoginUser;
+import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,5 +22,13 @@ public class UserViewController {
     @GetMapping("/signup")
     public String signup() {
         return "signup";
+    }
+
+    @GetMapping("/modify")
+    public String modify(@LoginUser SessionUser user, Model model) {
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "user-modify";
     }
 }

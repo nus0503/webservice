@@ -3,14 +3,14 @@ package com.jojoldu.book.webservice.web;
 import com.jojoldu.book.webservice.common.validation.CheckEmailValidator;
 import com.jojoldu.book.webservice.service.users.UserService;
 import com.jojoldu.book.webservice.web.dto.AddUserRequest;
+import com.jojoldu.book.webservice.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -44,5 +44,10 @@ public class UserApiController {
         return "redirect:/loginForm";
     }
 
+
+    @PutMapping("/user")
+    public ResponseEntity<String> modify(@RequestBody UserUpdateDto dto) {
+
+    }
 
 }
