@@ -1,5 +1,6 @@
 package com.jojoldu.book.webservice.domain.oAuthUser;
 
+import com.jojoldu.book.webservice.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "users")
 @Entity
-public class User implements Serializable {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +21,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -47,6 +48,10 @@ public class User implements Serializable {
         this.picture = picture;
 
         return this;
+    }
+
+    public void modify(String password) {
+        this.password = password;
     }
 
     public String getRoleKey() {
