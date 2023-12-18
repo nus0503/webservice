@@ -1,5 +1,6 @@
 package com.jojoldu.book.webservice.config.auth;
 
+import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,10 +20,11 @@ import java.util.Collection;
 @Setter
 public class PrincipalDetail implements UserDetails {
 
-    private User user;
+    private SessionUser user;
+//    private User user;
 
     public PrincipalDetail(User user) {
-        this.user = user;
+        this.user = new SessionUser(user);
     }
 
     /* 유저의 권한 목록 */

@@ -22,7 +22,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 
     private final HttpSession httpSession;
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("회원정보가 일치하지 않습니다. : " + email));
         httpSession.setAttribute("user", new SessionUser(user));
