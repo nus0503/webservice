@@ -49,6 +49,6 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
 
         String encodedPassword = bCryptPasswordEncoder.encode(dto.getPassword());
-        user.modify(encodedPassword);
+        user.modify(dto.getName(), encodedPassword);
     }
 }

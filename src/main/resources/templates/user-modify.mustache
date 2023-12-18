@@ -1,0 +1,28 @@
+{{>layout/header}}
+<div id="posts_list">
+    <div class="container col-md-4">
+        <form>
+            <label for="id"></label>
+            <input type="hidden" id="id" value="{{user.id}}"/>
+            <input type="hidden" id="modifiedDate" value="{{user.modifiedDate}}"/>
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" value="{{user.name}}" class="form-control" >
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" value="{{user.email}}" class="form-control" readonly/>
+            </div>
+
+            <div class="form-group">
+                <label for="password">패스워드</label>
+                <input type="password" id="password" class="form-control" placeholder="수정할 비밀번호를 입력해주세요"/>
+            </div>
+
+        </form>
+        <button id="btn-modify" class="btn btn-primary bi bi-check-lg"> 완료</button>
+        <a href="/" role="button" class="btn btn-info bi bi-arrow-return-left"> 목록</a>
+    </div>
+</div>
+{{>layout/footer}}
