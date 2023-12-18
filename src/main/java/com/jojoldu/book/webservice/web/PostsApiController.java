@@ -1,10 +1,13 @@
 package com.jojoldu.book.webservice.web;
 
+import com.jojoldu.book.webservice.config.auth.LoginUser;
+import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
 import com.jojoldu.book.webservice.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -13,8 +16,9 @@ public class PostsApiController {
     private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-        return postsService.save(requestDto);
+    public ResponseEntity save(@RequestBody PostsSaveRequestDto requestDto, @LoginUser SessionUser user) {
+        return ResponseEntity.ok(postsService.save(requestDto, user.getEmail()));
+
     }
 
     @PutMapping("/api/v1/posts/{id}")
@@ -23,7 +27,7 @@ public class PostsApiController {
     }
 
     @GetMapping("/api/v1/posts/{id}")
-    public PostsResponseDto findById(@PathVariable Long id) {
+    public PostsResponseDto findById(@PathVariable Long id, @LoginUser SessionUser user) {
         return postsService.findById(id);
     }
 

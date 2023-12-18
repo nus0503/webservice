@@ -1,6 +1,8 @@
 package com.jojoldu.book.webservice.service.posts;
 
 import com.jojoldu.book.webservice.common.PageableRequest;
+import com.jojoldu.book.webservice.domain.oAuthUser.User;
+import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
 import com.jojoldu.book.webservice.domain.posts.Posts;
 import com.jojoldu.book.webservice.domain.posts.PostsRepository;
 import com.jojoldu.book.webservice.web.dto.*;
@@ -18,7 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    public Long save(PostsSaveRequestDto requestDto) {
+    private final UserRepository userRepository;
+    public Long save(PostsSaveRequestDto requestDto, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("회원이 없습니다.")
+        );
+        requestDto.setUser(user);
         return postsRepository.save(requestDto.toEntity()).getId();
     }
 
@@ -45,7 +52,7 @@ public class PostsService {
     public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-
+        entity.getUser().getId();
         return new PostsResponseDto(entity);
     }
 
