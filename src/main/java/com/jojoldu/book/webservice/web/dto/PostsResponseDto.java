@@ -4,6 +4,9 @@ import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.domain.posts.Posts;
 import lombok.Getter;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 public class PostsResponseDto {
     private Long id;
@@ -12,7 +15,8 @@ public class PostsResponseDto {
     private String author;
     private int viewCount;
     private String createdDate;
-    private User user;
+    private Long userId;
+    private List<CommentsResponseDto> comments;
 
     public PostsResponseDto(Posts entity) {
         this.id = entity.getId();
@@ -21,6 +25,9 @@ public class PostsResponseDto {
         this.author = entity.getAuthor();
         this.viewCount = entity.getViewCount();
         this.createdDate = entity.getCreatedDate();
-        this.user = entity.getUser();
+        this.userId = entity.getUser().getId();
+        this.comments = entity.getComments().stream()
+                .map(CommentsResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
