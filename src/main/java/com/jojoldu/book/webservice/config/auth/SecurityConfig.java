@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .and()
                     .authorizeRequests()
                 // antMatchers()메소드는 http의 모든 메소드에 대한 요청을 대상으로 한다. 만약 특정 메소드의 경로를 지정하고 싶으면 .antMatchers(HttpMethod.GET, "경로")
-                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**", "/news/**", "/signup", "/loginForm", "/user").permitAll()
+                    .antMatchers("/**"/*, "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**", "/news/**", "/signup", "/loginForm", "/user"*/).permitAll()
                     .antMatchers("/api/v1/**").hasRole(Role.USER.name())
                     .anyRequest().authenticated() //위 antMatchers를 제외한 모든 url들은 로그인한 사용자들만 허용한다.
                 .and()
