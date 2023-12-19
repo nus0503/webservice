@@ -1,5 +1,6 @@
 package com.jojoldu.book.webservice.domain;
 
+import com.jojoldu.book.webservice.common.Period;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -29,12 +30,12 @@ public abstract class BaseTimeEntity {
      */
     @PrePersist
     public void onPrePersist() {
-        this.createdDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.createdDate = LocalDateTime.now().format(Period.yyyyMMddHHmm);
         this.modifiedDate = createdDate;
     }
 
     @PreUpdate
     public void onPreUpdate() {
-        this.modifiedDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.modifiedDate = LocalDateTime.now().format(Period.yyyyMMddHHmm);
     }
 }
