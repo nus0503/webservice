@@ -1,13 +1,15 @@
 package com.jojoldu.book.webservice.domain.posts;
 
 import com.jojoldu.book.webservice.domain.BaseTimeEntity;
+import com.jojoldu.book.webservice.domain.comments.Comments;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
-import com.jojoldu.book.webservice.domain.user.Users;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -32,6 +34,9 @@ public class Posts extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
+
+    @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Comments> comments;
 
     @Builder
     public Posts(String title, String content, String author, User user) {
