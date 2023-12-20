@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -36,7 +37,7 @@ public class Posts extends BaseTimeEntity {
     private User user;
 
     @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<Comments> comments;
+    private List<Comments> comments = new ArrayList<>();
 
     @Builder
     public Posts(String title, String content, String author, User user) {
