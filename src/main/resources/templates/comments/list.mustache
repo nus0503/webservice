@@ -11,12 +11,11 @@
                     <span style="font-size: small">{{username}}</span>
                     <span style="font-size: xx-small">{{createdDate}}</span>
                 </span>
-                <a data-toggle="collapse" data-target=".multi-collapse-{{id}}"
-                   class="bi bi-pencil-square"></a> {{! 댓글 수정 버튼 }}
+                {{#isis}}
+                <a data-toggle="collapse" data-target=".multi-collapse-{{id}}" class="bi bi-pencil-square"></a> {{! 댓글 수정 버튼 }}
 
-                <a onclick="main.commentDelete({{postsId}},{{id}})"
-                   class="bi bi-x-square"></a> {{! 댓글 삭제 버튼 }}
-
+                <a onclick="main.commentDelete({{postsId}},{{id}},{{userId}},{{user.id}})" class="bi bi-x-square"></a> {{! 댓글 삭제 버튼 }}
+                {{/isis}}
                 {{! 댓글 내용 }}
                 <p class="collapse multi-collapse-{{id}} show">{{comment}}</p>
 
@@ -24,6 +23,8 @@
                 <form class="collapse multi-collapse-{{id}}">
                     <input type="hidden" id="id" value="{{id}}">
                     <input type="hidden" id="postsId" value="{{postsId}}">
+                    <input type="hidden" id="writerUserId" value="{{userId}}">
+                    <input type="hidden" id="sessionUserId" value="{{#user}}{{user.id}}{{/user}}">
                     <div class="form-group">
                         <textarea class="form-control" id="comment-content" rows="3">{{comment}}</textarea>
                     </div>

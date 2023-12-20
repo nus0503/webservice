@@ -12,6 +12,7 @@ public class CommentsResponseDto {
     private String modifiedDate;
     private String username;
     private Long postsId;
+    private Long userId;
 
     public CommentsResponseDto(Comments comments) {
         this.id = comments.getId();
@@ -20,5 +21,6 @@ public class CommentsResponseDto {
         this.modifiedDate = comments.getModifiedDate();
         this.username = comments.getUser().getName();
         this.postsId = comments.getPosts().getId();
+        this.userId = comments.getUser().getId();
     }
 }
