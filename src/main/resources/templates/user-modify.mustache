@@ -18,6 +18,8 @@
             <div class="form-group">
                 <label for="password">패스워드</label>
                 <input type="password" id="password" class="form-control" placeholder="수정할 비밀번호를 입력해주세요"/>
+                <span><input type="checkbox" id="togglePassword" name="togglePassword"></span>
+                <label for="togglePassword">Show Password</label>
             </div>
 
         </form>
@@ -25,4 +27,14 @@
         <a href="/" role="button" class="btn btn-info bi bi-arrow-return-left"> 목록</a>
     </div>
 </div>
+<script>
+    document.getElementById("togglePassword").addEventListener("change", function () {
+        let passwordInput = document.getElementById("password");
+        if (this.checked) {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    });
+</script>
 {{>layout/footer}}
