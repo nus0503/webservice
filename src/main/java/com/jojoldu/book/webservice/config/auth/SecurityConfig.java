@@ -1,6 +1,6 @@
 package com.jojoldu.book.webservice.config.auth;
 
-import com.jojoldu.book.webservice.common.exception.CustomAuthFailureHandler;
+import com.jojoldu.book.webservice.config.handler.CustomAuthFailureHandler;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -14,8 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity // Spring Security 설정 활성화
