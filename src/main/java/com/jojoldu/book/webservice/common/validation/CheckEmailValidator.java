@@ -13,7 +13,7 @@ public class CheckEmailValidator extends AbstractValidator<AddUserRequest>{
     @Override
     protected void doValidate(AddUserRequest target, Errors errors) {
         if (userRepository.existsByEmail(target.getEmail())) {
-            errors.rejectValue("email", "이메일 중복 오류", "이미 사용중인 이메일 입니다.");
+            errors.rejectValue("email", "multi", "이미 사용중인 이메일 입니다.");
         }
     }
 }
