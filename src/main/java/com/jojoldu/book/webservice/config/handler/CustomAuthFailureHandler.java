@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.common.exception;
+package com.jojoldu.book.webservice.config.handler;
 
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationServiceException;
