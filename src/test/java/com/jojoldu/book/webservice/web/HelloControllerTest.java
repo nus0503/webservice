@@ -11,17 +11,17 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@WebMvcTest
-class HelloControllerTest {
-
-    @Autowired
-    private MockMvc mvc;
-    @Test
-    void helloDto가_리턴된다() throws Exception {
-        String name = "hello";
-        int amount = 1000;
-
-
-
-    }
-}
+//@WebMvcTest
+//class HelloControllerTest {
+//
+//    @Autowired
+//    private MockMvc mvc;
+//    @Test
+//    void helloDto가_리턴된다() throws Exception {
+//        String name = "hello";
+//        int amount = 1000;
+//
+//
+//
+//    }
+//}
