@@ -14,6 +14,8 @@
                 {{^username}}
                     <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
                     <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                    <a href="/loginForm" class="btn btn-primary" role="button">기본 로그인</a>
+                    <a href="/signup" class="btn btn-info" role="button">회원가입</a>
                 {{/username}}
                 {{#userInfo}}
                     <span>{{userInfo.email}} 님 안녕하세요.</span>
@@ -23,6 +25,8 @@
         </div>
 
     <br>
+    <button type="button"><a href="/posts/search">글 목록</a></button>
+
 <!--    <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">-->
 <!--        <input type="text" name="keyword" class="form-control" id="search" placeholder="검색">-->
 <!--        <button class="btn btn-success bi bi-search"></button>-->
