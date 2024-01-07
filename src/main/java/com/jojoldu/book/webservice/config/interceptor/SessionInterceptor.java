@@ -23,7 +23,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
-        UUID uuid = UUID.randomUUID();
+        String uuid = UUID.randomUUID().toString();
         request.setAttribute(LOG_ID, uuid);
 
         //@RequestMapping: HandlerMethod
