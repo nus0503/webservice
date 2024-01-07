@@ -2,6 +2,8 @@ package com.jojoldu.book.webservice.web;
 
 import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
+import com.jojoldu.book.webservice.domain.oAuthUser.Role;
+import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
@@ -35,5 +37,15 @@ public class PostsApiController {
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
+    }
+
+    @ResponseBody
+    @GetMapping("/api/posts/{id}")
+    public PostsSaveRequestDto aa(@PathVariable("id") String id) {
+
+        if ("ex".equals(id)) {
+            throw new RuntimeException("잘못");
+        }
+        return new PostsSaveRequestDto("a", "aa", "aaa", new User("1", "11", "111", "1111", Role.GUEST));
     }
 }
