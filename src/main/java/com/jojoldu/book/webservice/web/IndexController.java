@@ -7,31 +7,48 @@ import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 
 @RequiredArgsConstructor
+@Slf4j
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession session;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user, @AuthenticationPrincipal PrincipalDetail userInfo) {
+    public String index(Model model, HttpServletRequest request) {
         model.addAttribute("posts", postsService.findAllDesc());
 //        SessionUser user = (SessionUser) httpSession.getAttribute("user"); // getAttribute로 가져오던 세션 정보를 어노테이션 기반으로 개선
-        if (user != null) {
-            model.addAttribute("username", user.getName());
-        }
-        if (userInfo != null) {
-            model.addAttribute("userInfo", userInfo.getUser());
+//        if (user != null) {
+//            model.addAttribute("username", user.getName());
+//        }
+//        if (userInfo != null) {
+//            model.addAttribute("userInfo", userInfo.getUser());
+//
+//        }
 
-        }
+
+
+        session.getAttributeNames().asIterator()
+                .forEachRemaining(name -> log.info("session name={}, value={}, sessionId={}", name, session.getAttribute(name), session.getId()));
+        log.info(session.toString());
+        log.info("sessionId={}", session.getId());
+        log.info("getMax={}", session.getMaxInactiveInterval());
+        log.info("creationTime={}", new Date(session.getCreationTime()));
+        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));
+        log.info("isNew={}", session.isNew());
         return "index";
     }
 
