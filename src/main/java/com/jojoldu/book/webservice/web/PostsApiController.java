@@ -4,6 +4,7 @@ import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
+import com.jojoldu.book.webservice.exception.BadRequestException;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
@@ -47,5 +48,11 @@ public class PostsApiController {
             throw new RuntimeException("잘못");
         }
         return new PostsSaveRequestDto("a", "aa", "aaa", new User("1", "11", "111", "1111", Role.GUEST));
+    }
+
+    @ResponseBody
+    @GetMapping("/api/reponse-status-ex")
+    public String responseExceptionEx() {
+        throw new BadRequestException();
     }
 }
