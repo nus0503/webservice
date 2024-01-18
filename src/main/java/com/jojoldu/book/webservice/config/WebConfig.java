@@ -2,11 +2,13 @@ package com.jojoldu.book.webservice.config;
 
 import com.jojoldu.book.webservice.config.auth.LoginUserArgumentResolver;
 import com.jojoldu.book.webservice.config.filter.LogFilter;
+import com.jojoldu.book.webservice.config.formatter.NumberFormatter;
 import com.jojoldu.book.webservice.config.interceptor.SessionInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -41,5 +43,10 @@ public class WebConfig implements WebMvcConfigurer { //스프링에서 인식될
         filterFilterRegistrationBean.addUrlPatterns("/*");
 
         return filterFilterRegistrationBean;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new NumberFormatter());
     }
 }
