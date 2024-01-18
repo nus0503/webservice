@@ -6,16 +6,19 @@ import com.jojoldu.book.webservice.config.auth.PrincipalDetail;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -38,7 +41,6 @@ public class IndexController {
 //            model.addAttribute("userInfo", userInfo.getUser());
 //
 //        }
-
 
 
         session.getAttributeNames().asIterator()
@@ -69,5 +71,29 @@ public class IndexController {
     public String search(String keyword, PageableRequest request, Model model) {
         model.addAttribute("searchList", postsService.search(keyword, request));
         return "posts-search";
+    }
+
+
+    @GetMapping("/hello2")
+    public String hello(Model model) {
+        Form form = new Form();
+        form.setNumber(10000);
+        form.setLocalDateTime(LocalDateTime.now());
+        model.addAttribute("form", form);
+        return "formatter-form";
+    }
+
+    @PostMapping("/hello2")
+    public String hello2(@ModelAttribute Form form) {
+        return "formatter-view";
+    }
+
+    @Data
+    static class Form {
+        @NumberFormat(pattern = "###,###")
+        private Integer number;
+
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime localDateTime;
     }
 }
