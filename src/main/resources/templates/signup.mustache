@@ -1,7 +1,7 @@
 {{>layout/header}}
 <div class="login-box">
     <h2>signup</h2>
-    <form method="post", action="/user">
+    <form method="post", action="/user" enctype="multipart/form-data">
 <!--        <input class="aa" type="hidden" name="_csrf" value="{{!_csrf.token}}">-->
         <div class="user-box">
             <input type="text" name="name" value="{{#userDto}}{{userDto.name}}{{/userDto}}">
@@ -17,6 +17,9 @@
             <input type="password" name="password" value="{{#userDto}}{{userDto.password}}{{/userDto}}">
             <label>Password</label>
             {{#valid_password}} <span id="valid">{{valid_password}}</span> {{/valid_password}}
+        </div>
+        <div class="user-box">
+            <input type="file" name="imgFile" >
         </div>
         <button type="submit">
             <span></span>
