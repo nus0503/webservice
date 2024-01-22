@@ -32,7 +32,7 @@ public class WebConfig implements WebMvcConfigurer { //스프링에서 인식될
         registry.addInterceptor(sessionInterceptor)
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/js/app/**", "/*.ico", "/error", "/logout");
+                .excludePathPatterns("/css/**", "/js/app/**", "/*.ico", "/error", "/logout", "/images/**");
     }
 
     @Bean
