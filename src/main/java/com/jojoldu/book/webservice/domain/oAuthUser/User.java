@@ -1,15 +1,14 @@
 package com.jojoldu.book.webservice.domain.oAuthUser;
 
 import com.jojoldu.book.webservice.domain.BaseTimeEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.jojoldu.book.webservice.domain.userImage.UserImage;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
 @Entity
 public class User extends BaseTimeEntity {
@@ -34,6 +33,11 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @Setter
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "userImage_id")
+    private UserImage userImage;
+
     @Builder
     public User(String name, String email, String password, String picture, Role role) {
         this.name = name;
@@ -41,6 +45,15 @@ public class User extends BaseTimeEntity {
         this.password = password;
         this.picture = picture;
         this.role = role;
+    }
+
+    public User(String name, String email, String password, String picture, Role role, UserImage userImage) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.picture = picture;
+        this.role = role;
+        this.userImage = userImage;
     }
 
     public User update(String name, String picture) {
