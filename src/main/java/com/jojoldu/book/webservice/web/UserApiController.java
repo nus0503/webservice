@@ -1,6 +1,8 @@
 package com.jojoldu.book.webservice.web;
 
+import com.jojoldu.book.webservice.common.file.FileStore;
 import com.jojoldu.book.webservice.common.validation.CheckEmailValidator;
+import com.jojoldu.book.webservice.service.file.FileService;
 import com.jojoldu.book.webservice.service.users.UserService;
 import com.jojoldu.book.webservice.web.dto.AddUserRequest;
 import com.jojoldu.book.webservice.web.dto.UserUpdateDto;
@@ -16,8 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -28,13 +32,15 @@ public class UserApiController {
     private final CheckEmailValidator checkEmailValidator;
     private final AuthenticationManager authenticationManager;
 
+    private final FileService fileService;
+
     @InitBinder
     public void validatorBinber(WebDataBinder binder) {
         binder.addValidators(checkEmailValidator);
     }
 
     @PostMapping("/user")
-    public String signUp(@ModelAttribute @Valid AddUserRequest userDto, Errors errors, Model model) {
+    public String signUp(@ModelAttribute @Valid AddUserRequest userDto, Errors errors, @ModelAttribute MultipartFile imgFile, Model model) throws IOException {
 
         if (errors.hasErrors()) {
             model.addAttribute("userDto", userDto);
@@ -46,7 +52,11 @@ public class UserApiController {
 
             return "signup";
         }
-        userService.save(userDto);
+        if (imgFile.isEmpty()) {
+            userService.save(userDto);
+        } else {
+            userService.saveWithProfile(userDto, fileService.saveFile(FileStore.getFileDtoFromMultipartFile(imgFile, userDto.getEmail())));
+        }
         return "redirect:/loginForm";
     }
 

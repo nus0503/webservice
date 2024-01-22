@@ -3,7 +3,9 @@ package com.jojoldu.book.webservice.service.users;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
+import com.jojoldu.book.webservice.domain.userImage.UserImage;
 import com.jojoldu.book.webservice.web.dto.AddUserRequest;
+import com.jojoldu.book.webservice.web.dto.UserImageDto;
 import com.jojoldu.book.webservice.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,6 +35,9 @@ public class UserService {
                 .role(Role.GUEST)
                 .build()).getId();
     }
+    public Long saveWithProfile(AddUserRequest dto, UserImageDto imageDto) {
+        return userRepository.save(new User(dto.getName(), dto.getEmail(), bCryptPasswordEncoder.encode(dto.getPassword()), "asdasd", Role.GUEST, imageDto.toEntity())).getId();
+    }
 
     public Map<String, String> validateHandling(Errors errors) {
         return errors.getFieldErrors().stream()
@@ -50,5 +55,15 @@ public class UserService {
 
         String encodedPassword = bCryptPasswordEncoder.encode(dto.getPassword());
         user.modify(dto.getName(), encodedPassword);
+    }
+
+    public UserImageDto findById(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        return new UserImageDto(user.getUserImage().getId(),
+                user.getUserImage().getFileName(),
+                user.getUserImage().getFilePath(),
+                user.getUserImage().getFileType(),
+                user.getUserImage().getFileSize(),
+                user.getUserImage().getUploadUser());
     }
 }
