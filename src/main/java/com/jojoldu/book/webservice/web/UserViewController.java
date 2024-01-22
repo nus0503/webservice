@@ -25,6 +25,7 @@ import org.springframework.web.util.UriUtils;
 
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -76,8 +77,8 @@ public class UserViewController {
 
         log.info("uploadFileName={}", fileName);
 
-        String encodedUploadFileName = UriUtils.encode()
-        String contentDisposition = "attachment; filename=\"" + fileName + "\"";
+        String encodedUploadFileName = UriUtils.encode(fileName, StandardCharsets.UTF_8);
+        String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
