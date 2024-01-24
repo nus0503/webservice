@@ -2,9 +2,12 @@ package com.jojoldu.book.webservice.web;
 
 import com.jojoldu.book.webservice.common.file.FileStore;
 import com.jojoldu.book.webservice.common.validation.CheckEmailValidator;
+import com.jojoldu.book.webservice.common.validation.file.FileUploadValid;
+import com.jojoldu.book.webservice.common.validation.file.UploadAllowFileDefine;
 import com.jojoldu.book.webservice.service.file.FileService;
 import com.jojoldu.book.webservice.service.users.UserService;
 import com.jojoldu.book.webservice.web.dto.AddUserRequest;
+import com.jojoldu.book.webservice.web.dto.TestDto;
 import com.jojoldu.book.webservice.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,13 +37,15 @@ public class UserApiController {
 
     private final FileService fileService;
 
-    @InitBinder
+    @InitBinder("addUserRequest")
     public void validatorBinber(WebDataBinder binder) {
         binder.addValidators(checkEmailValidator);
     }
 
     @PostMapping("/user")
-    public String signUp(@ModelAttribute @Valid AddUserRequest userDto, Errors errors, @ModelAttribute MultipartFile imgFile, Model model) throws IOException {
+    public String signUp(@ModelAttribute @Valid AddUserRequest userDto,
+                         @ModelAttribute @Valid TestDto testDto, Errors errors,
+                         Model model) throws IOException {
 
         if (errors.hasErrors()) {
             model.addAttribute("userDto", userDto);
@@ -52,10 +57,10 @@ public class UserApiController {
 
             return "signup";
         }
-        if (imgFile.isEmpty()) {
+        if (testDto.getImgFile().isEmpty()) {
             userService.save(userDto);
         } else {
-            userService.saveWithProfile(userDto, fileService.saveFile(FileStore.getFileDtoFromMultipartFile(imgFile, userDto.getEmail())));
+            userService.saveWithProfile(userDto, fileService.saveFile(FileStore.getFileDtoFromMultipartFile(testDto.getImgFile(), userDto.getEmail())));
         }
         return "redirect:/loginForm";
     }
