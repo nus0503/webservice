@@ -20,6 +20,7 @@
         </div>
         <div class="user-box">
             <input type="file" name="imgFile" accept=".gif, .jpg, .png">
+            {{#valid_imgFile}}<span id="valid">{{valid_imgFile}}</span>{{/valid_imgFile}}
         </div>
         <button type="submit" id="submit">
             <span></span>
