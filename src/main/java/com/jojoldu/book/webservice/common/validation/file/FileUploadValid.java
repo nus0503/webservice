@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = FileUploadValidator.class)
 public @interface FileUploadValid {
 
-    String messsage() default "Invalid file type";
+    String message() default "Invalid file type";
 
     Class<?>[] groups() default {};
 
@@ -23,8 +23,5 @@ public @interface FileUploadValid {
 
     /** 업로드 허용 파일들의 정의 array(여러 종류의 파일 타입을 허용할 수도 있기에 array) */
     UploadAllowFileDefine[] allowFileDefine();
-
-
-
 
 }
