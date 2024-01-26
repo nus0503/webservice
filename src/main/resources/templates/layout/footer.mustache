@@ -8,9 +8,26 @@
 <!--    document.getElementById('csrf_token').value = csrfToken;-->
 
 <!--</script>-->
+<script>
+        document.getElementById('close-btn').addEventListener('click', function() {
+            var isChecked = document.getElementById('no-show-again').checked;
+            if (isChecked) {
+                localStorage.setItem('no-show-again', true);
+            }
+            document.getElementById('popup').style.display = 'none';
+        });
 
+
+    </script>
 <script>
     $(document).ready(function() {
+        var isNoShowAgain = localStorage.getItem('no-show-again');
+            if (isNoShowAgain !== "true") {
+                document.getElementById('popup').style.display = 'block';
+            } else {
+                document.getElementById('popup').style.display = 'none';
+            }
+
         var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
         var maxSize = 5242880; //5MB
 
