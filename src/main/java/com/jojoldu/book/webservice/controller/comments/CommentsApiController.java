@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web;
+package com.jojoldu.book.webservice.controller.comments;
 
 import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;

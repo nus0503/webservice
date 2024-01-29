@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web;
+package com.jojoldu.book.webservice.controller;
 
 import com.jojoldu.book.webservice.common.PageableRequest;
 import com.jojoldu.book.webservice.config.auth.LoginUser;

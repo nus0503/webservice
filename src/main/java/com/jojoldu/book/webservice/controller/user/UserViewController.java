@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web;
+package com.jojoldu.book.webservice.controller.user;
 
 import com.jojoldu.book.webservice.common.file.FileStore;
 import com.jojoldu.book.webservice.config.auth.LoginUser;
