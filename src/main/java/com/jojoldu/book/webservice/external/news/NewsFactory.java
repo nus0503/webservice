@@ -9,7 +9,7 @@ public class NewsFactory {
 
     public static News generated(NewsType newsType) {
 
-        if (newsType == NewsType.NAVER) {
+        if (newsType == NewsType.NAV) {
             return new NaverNews();
         }
         throw new IllegalStateException("문법에러");
