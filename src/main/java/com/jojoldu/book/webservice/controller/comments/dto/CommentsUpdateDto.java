@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web.dto;
+package com.jojoldu.book.webservice.controller.comments.dto;
 
 import lombok.Getter;
 import lombok.Setter;

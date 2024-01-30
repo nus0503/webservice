@@ -1,6 +1,6 @@
 package com.jojoldu.book.webservice.common.file;
 
-import com.jojoldu.book.webservice.web.dto.UserImageDto;
+import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

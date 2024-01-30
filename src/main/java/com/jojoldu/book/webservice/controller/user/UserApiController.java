@@ -2,13 +2,11 @@ package com.jojoldu.book.webservice.controller.user;
 
 import com.jojoldu.book.webservice.common.file.FileStore;
 import com.jojoldu.book.webservice.common.validation.CheckEmailValidator;
-import com.jojoldu.book.webservice.common.validation.file.FileUploadValid;
-import com.jojoldu.book.webservice.common.validation.file.UploadAllowFileDefine;
 import com.jojoldu.book.webservice.service.file.FileService;
 import com.jojoldu.book.webservice.service.users.UserService;
-import com.jojoldu.book.webservice.web.dto.AddUserRequest;
+import com.jojoldu.book.webservice.controller.user.dto.AddUserRequest;
 import com.jojoldu.book.webservice.web.dto.TestDto;
-import com.jojoldu.book.webservice.web.dto.UserUpdateDto;
+import com.jojoldu.book.webservice.controller.user.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;

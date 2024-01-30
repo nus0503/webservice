@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web;
+package com.jojoldu.book.webservice.controller.article;
 
 import com.jojoldu.book.webservice.external.news.News;
 import com.jojoldu.book.webservice.external.news.NewsFactory;

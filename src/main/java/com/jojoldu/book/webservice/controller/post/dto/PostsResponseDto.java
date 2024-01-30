@@ -1,6 +1,6 @@
-package com.jojoldu.book.webservice.web.dto;
+package com.jojoldu.book.webservice.controller.post.dto;
 
-import com.jojoldu.book.webservice.domain.oAuthUser.User;
+import com.jojoldu.book.webservice.controller.comments.dto.CommentsResponseDto;
 import com.jojoldu.book.webservice.domain.posts.Posts;
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.jojoldu.book.webservice.service.file;
 
 import com.jojoldu.book.webservice.domain.userImage.UserImageRepository;
-import com.jojoldu.book.webservice.web.dto.UserImageDto;
+import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

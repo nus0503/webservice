@@ -1,15 +1,11 @@
 package com.jojoldu.book.webservice.web;
 
 import com.jojoldu.book.webservice.common.PageableRequest;
-import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.service.posts.PostsService;
-import com.jojoldu.book.webservice.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.annotation.PostConstruct;
 
 @RequiredArgsConstructor
 @Controller

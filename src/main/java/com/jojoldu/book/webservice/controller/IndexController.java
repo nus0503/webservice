@@ -1,17 +1,13 @@
 package com.jojoldu.book.webservice.controller;
 
 import com.jojoldu.book.webservice.common.PageableRequest;
-import com.jojoldu.book.webservice.config.auth.LoginUser;
-import com.jojoldu.book.webservice.config.auth.PrincipalDetail;
-import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.service.posts.PostsService;
-import com.jojoldu.book.webservice.web.dto.PostsResponseDto;
+import com.jojoldu.book.webservice.controller.post.dto.PostsResponseDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

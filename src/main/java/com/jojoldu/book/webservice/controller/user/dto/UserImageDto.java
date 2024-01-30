@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web.dto;
+package com.jojoldu.book.webservice.controller.user.dto;
 
 import com.jojoldu.book.webservice.domain.userImage.UserImage;
 import lombok.Builder;

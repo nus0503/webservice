@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web.dto;
+package com.jojoldu.book.webservice.controller.post.dto;
 
 import com.jojoldu.book.webservice.domain.posts.Posts;
 

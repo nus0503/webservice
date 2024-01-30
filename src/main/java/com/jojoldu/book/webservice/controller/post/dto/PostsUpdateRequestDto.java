@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web.dto;
+package com.jojoldu.book.webservice.controller.post.dto;
 
 import lombok.Builder;
 import lombok.Getter;

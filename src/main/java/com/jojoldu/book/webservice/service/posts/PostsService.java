@@ -1,6 +1,7 @@
 package com.jojoldu.book.webservice.service.posts;
 
 import com.jojoldu.book.webservice.common.PageableRequest;
+import com.jojoldu.book.webservice.controller.post.dto.*;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
 import com.jojoldu.book.webservice.domain.posts.Posts;

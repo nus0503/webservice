@@ -3,18 +3,15 @@ package com.jojoldu.book.webservice.controller.user;
 import com.jojoldu.book.webservice.common.file.FileStore;
 import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
-import com.jojoldu.book.webservice.domain.userImage.UserImageRepository;
 import com.jojoldu.book.webservice.service.file.FileService;
 import com.jojoldu.book.webservice.service.users.UserService;
-import com.jojoldu.book.webservice.web.dto.UserImageDto;
-import com.nimbusds.oauth2.sdk.util.URLUtils;
+import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.util.UrlUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 
 import java.net.MalformedURLException;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j

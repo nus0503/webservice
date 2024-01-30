@@ -1,7 +1,7 @@
 package com.jojoldu.book.webservice.common.validation;
 
 import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
-import com.jojoldu.book.webservice.web.dto.AddUserRequest;
+import com.jojoldu.book.webservice.controller.user.dto.AddUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

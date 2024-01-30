@@ -3,10 +3,9 @@ package com.jojoldu.book.webservice.service.users;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
-import com.jojoldu.book.webservice.domain.userImage.UserImage;
-import com.jojoldu.book.webservice.web.dto.AddUserRequest;
-import com.jojoldu.book.webservice.web.dto.UserImageDto;
-import com.jojoldu.book.webservice.web.dto.UserUpdateDto;
+import com.jojoldu.book.webservice.controller.user.dto.AddUserRequest;
+import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
+import com.jojoldu.book.webservice.controller.user.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
