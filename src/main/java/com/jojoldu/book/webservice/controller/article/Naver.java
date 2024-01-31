@@ -3,7 +3,7 @@ package com.jojoldu.book.webservice.controller.article;
 import com.jojoldu.book.webservice.external.news.News;
 import com.jojoldu.book.webservice.external.news.NewsFactory;
 import com.jojoldu.book.webservice.external.news.NewsType;
-import com.jojoldu.book.webservice.web.dto.NaverNewsSearchDto;
+import com.jojoldu.book.webservice.controller.article.dto.NaverNewsSearchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;

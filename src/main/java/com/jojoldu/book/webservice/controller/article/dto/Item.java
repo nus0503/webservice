@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.web.dto;
+package com.jojoldu.book.webservice.controller.article.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

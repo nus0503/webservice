@@ -1,12 +1,6 @@
 package com.jojoldu.book.webservice.external.news;
 
-import com.jojoldu.book.webservice.web.dto.NaverNewsSearchDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.RequestEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
