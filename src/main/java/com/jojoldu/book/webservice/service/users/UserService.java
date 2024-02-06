@@ -7,6 +7,7 @@ import com.jojoldu.book.webservice.controller.user.dto.AddUserRequest;
 import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
 import com.jojoldu.book.webservice.controller.user.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.message.LoggerNameAwareMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +58,9 @@ public class UserService {
 
     public UserImageDto findById(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        if (user.getUserImage() == null) {
+            return new UserImageDto(new Long(0), "Asdsa");
+        }
         return new UserImageDto(user.getUserImage().getId(),
                 user.getUserImage().getFileName(),
                 user.getUserImage().getFilePath(),

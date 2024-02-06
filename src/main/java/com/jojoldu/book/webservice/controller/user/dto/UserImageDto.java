@@ -20,6 +20,11 @@ public class UserImageDto {
 
     private String uploadUser;
 
+    public UserImageDto(Long id, String fileName) {
+        this.id = id;
+        this.fileName = fileName;
+    }
+
     public UserImageDto(Long id, String fileName, String filePath, String fileType, Long fileSize, String uploadUser) {
         this.id = id;
         this.fileName = fileName;
