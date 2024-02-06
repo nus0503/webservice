@@ -41,7 +41,7 @@ public class UserApiController {
 
     @PostMapping("/user")
     public String signUp(@ModelAttribute @Valid AddUserRequest userDto,
-                         @ModelAttribute @Valid TestDto testDto, Errors errors,
+                         @RequestPart(required = false) @Valid TestDto testDto, Errors errors,
                          Model model) throws IOException {
 
         if (errors.hasErrors()) {
@@ -54,7 +54,7 @@ public class UserApiController {
 
             return "signup";
         }
-        if (testDto.getImgFile().isEmpty()) {
+        if (testDto == null) {
             userService.save(userDto);
         } else {
             userService.saveWithProfile(userDto, fileService.saveFile(FileStore.getFileDtoFromMultipartFile(testDto.getImgFile(), userDto.getEmail())));
