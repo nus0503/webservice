@@ -59,7 +59,7 @@ public class UserService {
     public UserImageDto findById(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
         if (user.getUserImage() == null) {
-            return new UserImageDto(new Long(0), "Asdsa");
+            return new UserImageDto(new Long(0), "empty.jpg");
         }
         return new UserImageDto(user.getUserImage().getId(),
                 user.getUserImage().getFileName(),

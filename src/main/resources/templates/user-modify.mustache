@@ -23,7 +23,7 @@
             </div>
             {{#image}}
             <div>
-                <a href="/attach/{{image.id}}">{{image.fileName}}</a>
+                <a href="/attach/{{image.id}}" id="imageDownload">{{image.fileName}}</a>
                 <img src="/images/{{image.fileName}}" width="300px" height="300px">
             </div>
             {{/image}}
@@ -39,6 +39,14 @@
             passwordInput.type = "text";
         } else {
             passwordInput.type = "password";
+        }
+    });
+
+    document.getElementById("imageDownload").addEventListener("click", function(e) {
+        const imgLink = document.getElementById("imageDownload").href;
+        if (imgLink.charAt(imgLink.length - 1) == 0) {
+            alert("해당 이미지는 다운로드 할 수 없습니다.");
+            e.preventDefault();
         }
     });
 </script>
