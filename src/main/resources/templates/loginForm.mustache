@@ -1,24 +1,88 @@
 {{>layout/header}}
-<div class="login-box">
-    <h2>Login</h2>
-    <form method="post" action="/login">
-<!--        <input id="csrf_token" type="hidden" name="_csrf" value="" />-->
-<!--        <input class="aa" type="hidden" name="_csrf" value="{{!_csrf.token}}">-->
-        <div class="user-box">
-            <input type="text" name="email">
-            <label>Username</label>
-        </div>
-        <div class="user-box">
-            <input type="password" name="password">
-            <label>Password</label>
-        </div>
+<!--<div class="login-box">-->
+<!--    <h2>Login</h2>-->
+<!--    <form method="post" action="/login">-->
+<!--&lt;!&ndash;        <input id="csrf_token" type="hidden" name="_csrf" value="" />&ndash;&gt;-->
+<!--&lt;!&ndash;        <input class="aa" type="hidden" name="_csrf" value="{{!_csrf.token}}">&ndash;&gt;-->
+<!--        <div class="user-box">-->
+<!--            <input type="text" name="email">-->
+<!--            <label>Username</label>-->
+<!--        </div>-->
+<!--        <div class="user-box">-->
+<!--            <input type="password" name="password">-->
+<!--            <label>Password</label>-->
+<!--        </div>-->
+<!--        <span>-->
+<!--            {{#error}}-->
+<!--            <p id="valid" class="alert alert-danger">{{exception}}</p>-->
+<!--            {{/error}}-->
+<!--        </span>-->
+<!--        <button type="submit">로그인</button>-->
+<!--        <div>-->
+<!--            <span><a href="#">아이디 찾기</a></span>-->
+<!--            <span><a href="#">비밀번호 찾기</a></span>-->
+<!--            <span><a href="/signup">회원가입</a></span>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<!---------------------->
+<div class="bg-img">
+    <div class="content">
+        <header>로그인</header>
+        <form method="post" action="/login">
+            <div class="field">
+                <span class="fa fa-user"></span>
+                <input type="text" name="email" required placeholder="Email or Phone">
+            </div>
+            <div class="field space">
+                <span class="fa fa-lock"></span>
+                <input type="password" class="pass-key" name="password" required placeholder="Password">
+                <span class="show">SHOW</span>
+            </div>
+            <div class="field">
+                <input type="submit" value="로그인">
+            </div>
+        </form>
         <span>
             {{#error}}
-            <p id="valid" class="alert alert-danger">{{exception}}</p>
+                <p id="valid" class="alert alert-danger">{{exception}}</p>
             {{/error}}
         </span>
-        <button type="submit">로그인</button>
-    </form>
+        <div class="login">
+            Or login with
+        </div>
+        <div class="links">
+            <a href="/oauth2/authorization/google">
+                <div class="facebook">
+                    <i class="fab fa-google"><span>Google</span></i>
+                </div>
+            </a>
+            <a href="/oauth2/authorization/naver">
+            <div class="instagram">
+                <i class="fab fa-instagram"><span>Naver</span></i>
+            </div>
+            </a>
+        </div>
+        <div>
+            <span><a href="#">아이디 찾기</a></span>
+            <span><a href="#">비밀번호 찾기</a></span>
+            <span><a href="/signup">회원가입</a></span>
+        </div>
+    </div>
 </div>
-
+<script>
+         const pass_field = document.querySelector('.pass-key');
+         const showBtn = document.querySelector('.show');
+         showBtn.addEventListener('click', function(){
+          if(pass_field.type === "password"){
+            pass_field.type = "text";
+            showBtn.textContent = "HIDE";
+            showBtn.style.color = "#3498db";
+          }else{
+            pass_field.type = "password";
+            showBtn.textContent = "SHOW";
+            showBtn.style.color = "#222";
+          }
+         });
+      </script>
 {{>layout/footer}}
