@@ -52,14 +52,14 @@ public class SessionInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false); // 현재 세션을 가져옴, 없으면 null 반환
         if (session != null) {
             SessionUser user = (SessionUser) session.getAttribute("user");
-            if (user != null) {
+            if (user != null && modelAndView != null) {
                 modelAndView.addObject("username", user.getName());
             }
         }
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (principal instanceof PrincipalDetail) {
+        if (principal instanceof PrincipalDetail && modelAndView != null) {
             PrincipalDetail userInfo = (PrincipalDetail) principal;
             modelAndView.addObject("userInfo", userInfo.getUser());
         }
