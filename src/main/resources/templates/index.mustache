@@ -14,8 +14,10 @@
         </div>
     {{/userInfo}}
     {{#username}}
+        <div style="display: inline-block; float: right">
         Logged in as: <span id="user">{{username}}</span>
         <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+        </div>
     {{/username}}
 
     <div class="col-md-12">
