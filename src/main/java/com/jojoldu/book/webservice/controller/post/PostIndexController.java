@@ -46,7 +46,7 @@ public class PostIndexController {
 //                model.addAttribute("isWriter",isWriter);
             });
         }
-        postsService.updateViewCount(id);
+        postsService.updateViewCount(id, user);
         model.addAttribute("posts", responseDto);
         return "posts-read";
     }
