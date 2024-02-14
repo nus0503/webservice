@@ -1,6 +1,9 @@
 package com.jojoldu.book.webservice.service.posts;
 
 import com.jojoldu.book.webservice.common.PageableRequest;
+import com.jojoldu.book.webservice.common.dateTime.DateTimeUtil;
+import com.jojoldu.book.webservice.common.redis.RedisUtil;
+import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.controller.post.dto.*;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +27,8 @@ import java.util.stream.Collectors;
 public class PostsService {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
+    private final RedisUtil redisUtil;
+
     public Long save(PostsSaveRequestDto requestDto, String email) {
         User user = userRepository.findByEmail(email).orElseThrow(
                 () -> new IllegalArgumentException("회원이 없습니다.")
@@ -41,8 +48,36 @@ public class PostsService {
     }
 
     @Transactional
-    public int updateViewCount(Long id) {
+    public int updateViewCount(Long id, SessionUser user) {
+
+        String viewCount = redisUtil.getData(String.valueOf(user.getId()));
+
+        if (viewCount == null) {
+            redisUtil.setData(String.valueOf(user.getId()), id + "_", DateTimeUtil.calculateTimeUntilMidnight());
             return postsRepository.updateViewCount(id);
+        } else {
+            String[] viewCountArr = viewCount.split("_");
+            List<String> redisViewCountList = Arrays.asList(viewCountArr);
+
+            boolean isView = false;
+
+            if (!redisViewCountList.isEmpty()) {
+                for (String viewedCount : redisViewCountList) {
+                    if (String.valueOf(id).equals(viewedCount)) {
+                        isView = true;
+                        break;
+                    }
+                }
+                if (!isView) {
+                    viewCount += id + "_";
+
+                    redisUtil.setData(String.valueOf(user.getId()), viewCount, DateTimeUtil.calculateTimeUntilMidnight());
+                    postsRepository.updateViewCount(id);
+                }
+            }
+        }
+//        return postsRepository.updateViewCount(id);
+        return 0;
     }
 
     public Page<PostsSearchListResponseDto> search(String keyword, PageableRequest request) {
