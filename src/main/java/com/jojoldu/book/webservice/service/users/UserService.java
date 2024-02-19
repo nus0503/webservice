@@ -1,11 +1,13 @@
 package com.jojoldu.book.webservice.service.users;
 
+import com.jojoldu.book.webservice.common.password.PasswordUtil;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import com.jojoldu.book.webservice.domain.oAuthUser.UserRepository;
 import com.jojoldu.book.webservice.controller.user.dto.AddUserRequest;
 import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
 import com.jojoldu.book.webservice.controller.user.dto.UserUpdateDto;
+import com.jojoldu.book.webservice.service.mail.TempPasswordMailService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.message.LoggerNameAwareMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -24,6 +28,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final TempPasswordMailService tempPasswordMailService;
 
     public Long save(AddUserRequest dto) {
         return userRepository.save(User.builder()
@@ -54,6 +60,16 @@ public class UserService {
 
         String encodedPassword = bCryptPasswordEncoder.encode(dto.getPassword());
         user.modify(dto.getName(), encodedPassword);
+    }
+
+    @Transactional
+    public void modifyAsPassword(String email) throws MessagingException, UnsupportedEncodingException {
+        String tempPassword = PasswordUtil.tempPasswordGenerate();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        String encodedPassword = bCryptPasswordEncoder.encode(tempPassword);
+        user.modifyAsPassword(encodedPassword);
+        tempPasswordMailService.sendSimpleMessage(email, tempPassword);
     }
 
     public UserImageDto findById(String email) {

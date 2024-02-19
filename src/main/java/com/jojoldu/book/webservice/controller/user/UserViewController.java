@@ -3,6 +3,7 @@ package com.jojoldu.book.webservice.controller.user;
 import com.jojoldu.book.webservice.common.file.FileStore;
 import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
+import com.jojoldu.book.webservice.controller.user.dto.TempPasswordFormRequestDto;
 import com.jojoldu.book.webservice.service.file.FileService;
 import com.jojoldu.book.webservice.service.users.UserService;
 import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
@@ -14,12 +15,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
+import javax.mail.MessagingException;
+import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 
@@ -46,6 +48,21 @@ public class UserViewController {
     @GetMapping("/signup")
     public String signup() {
         return "signup";
+    }
+
+    @GetMapping("/findPassword")
+    public String findPassword() {
+        return "find-password";
+    }
+
+    @PostMapping("/findPassword")
+    public String sendTempPassword(@ModelAttribute @Valid TempPasswordFormRequestDto dto, Errors errors, Model model) throws MessagingException, UnsupportedEncodingException {
+        if (errors.hasErrors()) {
+            model.addAttribute("error", errors.getFieldValue("email"));
+            return "find-password";
+        }
+        userService.modifyAsPassword(dto.getEmail());
+        return "redirect:/";
     }
 
     @GetMapping("/modify")

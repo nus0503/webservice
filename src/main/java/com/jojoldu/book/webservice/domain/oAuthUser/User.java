@@ -68,6 +68,10 @@ public class User extends BaseTimeEntity {
         this.password = password;
     }
 
+    public void modifyAsPassword(String password) {
+        this.password = password;
+    }
+
     public String getRoleKey() {
         return this.role.getKey();
     }
