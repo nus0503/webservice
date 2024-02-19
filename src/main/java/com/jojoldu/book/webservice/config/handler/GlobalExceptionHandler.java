@@ -2,9 +2,14 @@ package com.jojoldu.book.webservice.config.handler;
 
 import com.jojoldu.book.webservice.exception.dto.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
+
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -20,5 +25,17 @@ public class GlobalExceptionHandler {
     public ErrorResult illegalExceptionHandle(IllegalArgumentException e) {
         log.error("[exceptionHandle] ex", e);
         return new ErrorResult("BAD", e.getMessage());
+    }
+
+    @ExceptionHandler({MessagingException.class, UnsupportedEncodingException.class})
+    public ErrorResult messagingExceptionHandle(Exception e) {
+        log.error("[exceptionHandle] ex", e);
+        return new ErrorResult("Error", "이메일 생성 에러");
+    }
+
+    @ExceptionHandler(MailException.class)
+    public ErrorResult mailExceptionHandle(MailException e) {
+        log.error("[exceptionHandle] ex", e);
+        return new ErrorResult("Error", "이메일 전송 에러");
     }
 }
