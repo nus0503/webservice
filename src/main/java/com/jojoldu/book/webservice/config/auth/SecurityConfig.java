@@ -1,8 +1,10 @@
 package com.jojoldu.book.webservice.config.auth;
 
+import com.jojoldu.book.webservice.config.filter.token.JwtAuthorizationFilter;
 import com.jojoldu.book.webservice.config.handler.CustomAuthFailureHandler;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +16,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import javax.servlet.Filter;
+
+@Slf4j
 @Configuration
 @EnableWebSecurity // Spring Security 설정 활성화
 @RequiredArgsConstructor
@@ -26,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        log.debug("[+] WebSecurityConfig Start !!! ");
         http
                 .csrf().disable()
                 // 나중에 csrf적용할 것.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringAntMatchers("/h2-console/**", "/signup").and()
@@ -37,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                     .antMatchers("/api/v1/**").hasRole(Role.USER.name())
                     .anyRequest().authenticated() //위 antMatchers를 제외한 모든 url들은 로그인한 사용자들만 허용한다.
                 .and()
+                    .addFilterBefore(jwtAuthorizationFilter(), BasicAuthenticationFilter.class)
                     .logout() // 로그아웃 경로 기본값은 /logout
                         .logoutSuccessUrl("/")
                 .and()
@@ -54,6 +62,11 @@ public class SecurityConfig extends WebSecurityConfiguration {
                         .userInfoEndpoint()
                             .userService(customOAuth2UserService);
         return http.build();
+    }
+
+    @Bean
+    public JwtAuthorizationFilter jwtAuthorizationFilter() {
+        return new JwtAuthorizationFilter();
     }
 
     @Bean
