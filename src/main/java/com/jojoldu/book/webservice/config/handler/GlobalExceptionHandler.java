@@ -1,7 +1,10 @@
 package com.jojoldu.book.webservice.config.handler;
 
-import com.jojoldu.book.webservice.exception.dto.ErrorResult;
+import com.jojoldu.book.webservice.config.exception.BusinessExceptionHandler;
+import com.jojoldu.book.webservice.config.exception.dto.ErrorResult;
+import com.nimbusds.oauth2.sdk.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,4 +41,10 @@ public class GlobalExceptionHandler {
         log.error("[exceptionHandle] ex", e);
         return new ErrorResult("Error", "이메일 전송 에러");
     }
+
+//    @ExceptionHandler(BusinessExceptionHandler.class)
+//    public ResponseEntity<ErrorResponse> handleCustomException(BusinessExceptionHandler ex) {
+//        log.debug("------------------------------------------");
+//        final ErrorResponse response = ex.getMessage()
+//    }
 }
