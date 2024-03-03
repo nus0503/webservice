@@ -1,6 +1,7 @@
 package com.jojoldu.book.webservice.common.jwt;
 
 import com.jojoldu.book.webservice.controller.user.dto.UserFindPasswordDto;
+import com.jojoldu.book.webservice.controller.user.dto.UserImageDto;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
@@ -43,12 +44,12 @@ public class TokenUtil {
      * @return 토큰
      */
 
-    public static String generateJwtToken(UserFindPasswordDto dto, User User) {
+    public static String generateJwtToken(UserFindPasswordDto dto, UserImageDto user) {
 
         return Jwts.builder()
                 .setHeader(createHeader()) // Header 구성
                 .setClaims(createClaims(dto)) // Payload - Claims 구성
-                .setSubject(String.valueOf(User.getId())) // Payload - Subject 구성
+                .setSubject(String.valueOf(user.getId())) // Payload - Subject 구성
                 .signWith(SignatureAlgorithm.HS256, createSignature()) // Signature 구성
                 .setExpiration(createExpiredDate()) // Expired Date 구성
                 .compact();
@@ -163,5 +164,10 @@ public class TokenUtil {
     private static Key createSignature() {
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(jwtSecretKey);
         return new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS256.getJcaName());
+    }
+
+    public static String getUserEmailToken(String token) {
+        Claims claims = getClaimsFormToken(token);
+        return claims.get("userEmail").toString();
     }
 }

@@ -1,6 +1,6 @@
 package com.jojoldu.book.webservice.config.auth;
 
-import com.jojoldu.book.webservice.config.filter.token.JwtAuthorizationFilter;
+//import com.jojoldu.book.webservice.config.filter.token.JwtAuthorizationFilter;
 import com.jojoldu.book.webservice.config.handler.CustomAuthFailureHandler;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                     .antMatchers("/api/v1/**").hasRole(Role.USER.name())
                     .anyRequest().authenticated() //위 antMatchers를 제외한 모든 url들은 로그인한 사용자들만 허용한다.
                 .and()
-                    .addFilterBefore(jwtAuthorizationFilter(), BasicAuthenticationFilter.class)
+//                    .addFilterBefore(jwtAuthorizationFilter(), BasicAuthenticationFilter.class)
                     .logout() // 로그아웃 경로 기본값은 /logout
                         .logoutSuccessUrl("/")
                 .and()
@@ -64,10 +64,10 @@ public class SecurityConfig extends WebSecurityConfiguration {
         return http.build();
     }
 
-    @Bean
-    public JwtAuthorizationFilter jwtAuthorizationFilter() {
-        return new JwtAuthorizationFilter();
-    }
+//    @Bean
+//    public JwtAuthorizationFilter jwtAuthorizationFilter() {
+//        return new JwtAuthorizationFilter();
+//    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
