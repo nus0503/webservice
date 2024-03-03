@@ -1,11 +1,10 @@
 package com.jojoldu.book.webservice.exHandler;
 
-import com.jojoldu.book.webservice.exception.dto.ErrorResult;
+import com.jojoldu.book.webservice.config.exception.dto.ErrorResult;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j

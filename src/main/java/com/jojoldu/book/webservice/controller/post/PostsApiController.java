@@ -4,7 +4,7 @@ import com.jojoldu.book.webservice.config.auth.LoginUser;
 import com.jojoldu.book.webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.webservice.domain.oAuthUser.Role;
 import com.jojoldu.book.webservice.domain.oAuthUser.User;
-import com.jojoldu.book.webservice.exception.BadRequestException;
+import com.jojoldu.book.webservice.config.exception.BadRequestException;
 import com.jojoldu.book.webservice.service.posts.PostsService;
 import com.jojoldu.book.webservice.controller.post.dto.PostsSaveRequestDto;
 import com.jojoldu.book.webservice.controller.post.dto.PostsResponseDto;
