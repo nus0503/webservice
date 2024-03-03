@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.exception.dto;
+package com.jojoldu.book.webservice.config.exception.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

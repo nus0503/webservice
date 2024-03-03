@@ -1,4 +1,4 @@
-package com.jojoldu.book.webservice.exception;
+package com.jojoldu.book.webservice.config.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
