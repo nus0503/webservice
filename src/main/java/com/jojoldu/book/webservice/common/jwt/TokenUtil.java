@@ -10,12 +10,10 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * JWT 관련 토큰 util class
@@ -162,7 +160,9 @@ public class TokenUtil {
      * @return
      */
     private static Key createSignature() {
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(jwtSecretKey);
+        byte[] bytes = jwtSecretKey.getBytes(StandardCharsets.UTF_8);
+        String encoded = Base64.getEncoder().encodeToString(bytes);
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(encoded);
         return new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS256.getJcaName());
     }
 
